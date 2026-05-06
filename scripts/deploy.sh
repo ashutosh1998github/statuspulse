@@ -3,7 +3,7 @@
 set -e
 
 DEPLOY_DIR="/opt/statuspulse"
-IMAGE="ghcr.io/YOUR_GITHUB_USERNAME/statuspulse:latest"
+IMAGE="ghcr.io/ashutosh1998github/statuspulse:latest"
 LOG_FILE="/var/log/statuspulse-deploy.log"
 
 log() {
