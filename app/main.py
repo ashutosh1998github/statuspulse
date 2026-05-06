@@ -1,3 +1,4 @@
+this is intentionally broken for CI testing
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from datetime import datetime, timezone
