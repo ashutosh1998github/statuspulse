@@ -6,6 +6,7 @@ volumes:
   postgres-data:
   caddy-data:
   caddy-config:
+  uptime-kuma-data:
 
 services:
   app:
@@ -78,3 +79,15 @@ services:
     restart: unless-stopped
     depends_on:
       - app
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: statuspulse-uptime-kuma
+    volumes:
+      - uptime-kuma-data:/app/data
+    ports:
+      - "3001:3001"
+    networks:
+      - statuspulse-net
+    mem_limit: 256m
+    restart: unless-stopped
