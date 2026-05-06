@@ -29,7 +29,7 @@ docker compose up -d --build
 # Wait for health check
 log "Waiting for health check..."
 for i in $(seq 1 30); do
-    STATUS=$(curl -s http://localhost:8000/health | python3 -c "import sys,json; print(json.load(sys.stdin)['status'])" 2>/dev/null)
+    STATUS=$(curl -s https://statuspulse.duckdns.org/health | python3 -c "import sys,json; print(json.load(sys.stdin)['status'])" 2>/dev/null)
     if [ "$STATUS" = "healthy" ]; then
         log "✅ Deployment successful!"
         exit 0
@@ -38,8 +38,10 @@ for i in $(seq 1 30); do
     sleep 3
 done
 
+
+
 # Rollback if health check failed
-log "❌ Health check failed! Rolling back..."
+log "❌ Health check failed! "
 docker compose down
 docker tag "$PREVIOUS" "$IMAGE" 2>/dev/null || true
 docker compose up -d
