@@ -24,6 +24,8 @@ docker compose up -d
 
 # Wait for health check
 log "Waiting for health check..."
+sleep 15
+
 for i in $(seq 1 30); do
     STATUS=$(curl -s https://statuspulse.duckdns.org/health | python3 -c "import sys,json; print(json.load(sys.stdin)['status'])" 2>/dev/null)
     if [ "$STATUS" = "healthy" ]; then
