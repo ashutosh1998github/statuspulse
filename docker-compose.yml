@@ -1,19 +1,19 @@
-version: "3.8"
-
 networks:
   statuspulse-net:
     driver: bridge
 
 volumes:
   postgres-data:
+  caddy-data:
+  caddy-config:
 
 services:
   app:
     build: .
     container_name: statuspulse-app
     env_file: .env
-    ports:
-      - "${APP_PORT:-8000}:8000"
+    expose:
+      - "8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -61,3 +61,20 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: statuspulse-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      - statuspulse-net
+    mem_limit: 128m
+    restart: unless-stopped
+    depends_on:
+      - app
