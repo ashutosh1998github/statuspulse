@@ -72,7 +72,9 @@ jobs:
           done
 
       - name: Run integration tests
-        run: bash tests/test_integration.sh
+        run: |
+          chmod +x tests/test_integration.sh
+          bash tests/test_integration.sh
 
       - name: Upload test results
         if: always()
