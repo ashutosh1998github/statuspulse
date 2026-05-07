@@ -3,17 +3,17 @@
 A lightweight status page and health monitoring API built with FastAPI, PostgreSQL, and Redis — fully containerized and deployed with CI/CD, HTTPS, and monitoring.
 
 **Live URL:** https://statuspulse.duckdns.org  
-**Status Page:** http://13.206.199.147:3001  
+**Status Page:** https://github.com/ashutosh1998github/statuspulse 
 **API Docs:** https://statuspulse.duckdns.org/docs  
 
 ---
 
 ## Architecture
 
-                   ┌─────────────────────────────────────┐
+                     ┌─────────────────────────────────────┐
                      │           AWS EC2 (t2.micro)        │
                      │                                     │
-Internet ──HTTPS──▶ Caddy (443/80) ──▶ FastAPI App (8000)  │
+Internet ──HTTPS──▶ Caddy (443/80) ──▶ FastAPI App (8000) │
 │                    │                │
 │            ┌───────┴────────┐       │
 │            ▼                ▼       │
